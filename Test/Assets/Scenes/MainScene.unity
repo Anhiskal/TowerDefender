@@ -891,6 +891,9 @@ MonoBehaviour:
   mapSize: {x: 11, y: 11}
   map: {fileID: 1559140522}
   tileContentFactory: {fileID: 11400000, guid: ba3da3db373759044a833a23e22bf084, type: 2}
+  enemyFactory: {fileID: 11400000, guid: 28418a40c8112764091d8a5294da1bb5, type: 2}
+  spawnSpeed: 1
+  timeForSpawn: 3
 --- !u!4 &1507317702
 Transform:
   m_ObjectHideFlags: 0

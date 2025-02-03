@@ -14,11 +14,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameSlotContentFactory tileContentFactory = default;
 
+    [SerializeField]
+    EnemyFactory enemyFactory = default;
+    [SerializeField, Range(0.1f, 10f)]
+    float spawnSpeed = 1f;
+    float spawnProgress;
+    [SerializeField]
+    float timeForSpawn = 3f;
+
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
     void Awake()
     {
-        map.Initialize(mapSize);
+        map.Initialize(mapSize, tileContentFactory);
     }
 
     void OnValidate()
@@ -37,16 +45,26 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            HandleTouch();
+            handleTouch();
         }
 
         else if (Input.GetMouseButtonDown(1))
         {
-            HandleAlternativeTouch();
+            handleAlternativeTouch();
         }
+
+        if (map.SpawnPointCount >= 1)
+        {
+            spawnProgress += spawnSpeed * Time.deltaTime;
+            while (spawnProgress >= timeForSpawn)
+            {
+                spawnProgress = 0;
+                spawanEnemy();
+            }
+        }        
     }
 
-    void HandleTouch()
+    void handleTouch()
     {
         SlotMap slot = map.getSlot(TouchRay);
         if (slot != null)
@@ -56,13 +74,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void HandleAlternativeTouch()
+    void handleAlternativeTouch()
     {
         SlotMap slot = map.getSlot(TouchRay);
         if (slot != null)
-        {
-            slot.Content =
-            tileContentFactory.get(GameSlotContentType.Tower);
+        {            
+            map.ToggleSpawnPoint(slot);
         }
     }
+
+    void spawanEnemy() 
+    {
+        SlotMap spawnPoint =
+            map.getSpawnPoint(Random.Range(0, map.SpawnPointCount));
+        Enemy enemy = enemyFactory.Get();
+        enemy.spawnOn(spawnPoint);
+    }   
 }
