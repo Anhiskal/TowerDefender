@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     float timeForSpawn = 3f;
 
+    EnemyCollection enemies = new EnemyCollection();
+
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
     void Awake()
@@ -61,7 +63,11 @@ public class GameManager : MonoBehaviour
                 spawnProgress = 0;
                 spawanEnemy();
             }
-        }        
+        }
+        if (enemies.enemiesCount >= 1 ) 
+        {
+            enemies.GameUpdate();
+        }
     }
 
     void handleTouch()
@@ -85,9 +91,9 @@ public class GameManager : MonoBehaviour
 
     void spawanEnemy() 
     {
-        SlotMap spawnPoint =
-            map.getSpawnPoint(Random.Range(0, map.SpawnPointCount));
-        Enemy enemy = enemyFactory.Get();
+        SlotMap spawnPoint = map.getSpawnPoint(Random.Range(0, map.SpawnPointCount));
+        Enemy enemy = enemyFactory.get();
         enemy.spawnOn(spawnPoint);
+        enemies.Add(enemy);
     }   
 }

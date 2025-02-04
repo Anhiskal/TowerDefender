@@ -6,7 +6,7 @@ public class EnemyFactory : GameObjectFactory
     [SerializeField]
     Enemy prefab = default;
 
-    public Enemy Get()
+    public Enemy get()
     {
         Enemy instance = CreateGameObjectInstance(prefab);
         instance.OriginFactory = this;
