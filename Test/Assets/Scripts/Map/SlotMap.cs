@@ -11,7 +11,7 @@ public class SlotMap : MonoBehaviour
 
     public enum GameSlotContentType
     {
-        Empty, Destination, Wall, Tower
+        Empty, Destination, Wall, Tower, SpawnPoint
     }
 
     GameSlotContent content;
