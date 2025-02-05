@@ -3,8 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     EnemyFactory originFactory;
-    [SerializeField]
-    float speedEnemy = 5f;
+    float speedEnemy;    
 
     public EnemyFactory OriginFactory
     {
@@ -15,6 +14,9 @@ public class Enemy : MonoBehaviour
             originFactory = value;
         }
     }
+   
+
+    float health {  get; set; }
 
     public void spawnOn(SlotMap slot)
     {
@@ -23,7 +25,24 @@ public class Enemy : MonoBehaviour
 
     public bool gameUpdate()
     {
+        if (health <= 0f) 
+        {
+            originFactory.Reclaim(this);
+            return false;
+        }
         transform.localPosition += Vector3.forward * Time.deltaTime * speedEnemy;
         return true;
+    }
+
+    public void initialize(float speed, float initialHealth)
+    {
+        speedEnemy = speed;
+        health = initialHealth;
+    }
+
+    public void applyDamage(float damage)
+    {
+        Debug.Assert(damage >= 0f, "Negative damage applied.");
+        health -= damage;
     }
 }
