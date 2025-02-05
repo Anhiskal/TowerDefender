@@ -366,6 +366,8 @@
 "Assets/Scripts/Map/GameSlotContent.cs"
 "Assets/Scripts/Map/GameSlotContentFactory.cs"
 "Assets/Scripts/Map/SlotMap.cs"
+"Assets/Scripts/Tower/TargetPoint.cs"
+"Assets/Scripts/Tower/Tower.cs"
 -langversion:9.0
 /deterministic
 /optimize-

@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
         {
             enemies.GameUpdate();
         }
+
+        Physics.SyncTransforms();
+        map.gameUpdate();
     }
 
     void handleTouch()
@@ -75,8 +78,7 @@ public class GameManager : MonoBehaviour
         SlotMap slot = map.getSlot(TouchRay);
         if (slot != null)
         {
-            slot.Content =
-            tileContentFactory.get(GameSlotContentType.Destination);
+            map.ToggleTower(slot);
         }
     }
 

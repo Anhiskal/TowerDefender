@@ -17,7 +17,8 @@ public class GameMap : MonoBehaviour
 
     GameSlotContentFactory contentFactory;
 
-    List<SlotMap> spawnPoints = new List<SlotMap>();    
+    List<SlotMap> spawnPoints = new List<SlotMap>();
+    List<GameSlotContent> updatingContent = new List<GameSlotContent>();
 
     public void Initialize(Vector2Int size, GameSlotContentFactory contentFactory)
     {
@@ -48,7 +49,7 @@ public class GameMap : MonoBehaviour
 
     public SlotMap getSlot(Ray ray) 
     {
-        if (Physics.Raycast(ray, out RaycastHit hit)) 
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, 1)) 
         {
             int x = (int)(hit.point.x + size.x * 0.5f);
             int y = (int)(hit.point.z + size.y * 0.5f);
@@ -68,6 +69,14 @@ public class GameMap : MonoBehaviour
     }
 
     public int SpawnPointCount => spawnPoints.Count;
+
+    public void gameUpdate()
+    {
+        for (int i = 0; i < updatingContent.Count; i++)
+        {
+            updatingContent[i].gameUpdate();
+        }
+    }
 
     public void ToggleDestination(SlotMap slot) 
     {
@@ -93,11 +102,13 @@ public class GameMap : MonoBehaviour
     {
         if (slot.Content.Type == GameSlotContentType.Tower)
         {
+            updatingContent.Remove(slot.Content);
             slot.Content = contentFactory.get(GameSlotContentType.Empty);
         }
         else if (slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Tower);
+            updatingContent.Add(slot.Content);
         }
     }
 

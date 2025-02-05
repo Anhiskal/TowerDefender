@@ -14,7 +14,7 @@ public class GameSlotContentFactory : GameObjectFactory
     GameSlotContent wallPrefab = default;
 
     [SerializeField]
-    GameSlotContent towerPrefab = default;
+    Tower towerPrefab = default;
 
     [SerializeField]
     GameSlotContent spawnPrefab = default;    
