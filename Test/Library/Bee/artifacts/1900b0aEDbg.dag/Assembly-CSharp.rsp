@@ -368,6 +368,7 @@
 "Assets/Scripts/Map/SlotMap.cs"
 "Assets/Scripts/Tower/TargetPoint.cs"
 "Assets/Scripts/Tower/Tower.cs"
+"Assets/Scripts/UI/SlotGameSelection.cs"
 -langversion:9.0
 /deterministic
 /optimize-

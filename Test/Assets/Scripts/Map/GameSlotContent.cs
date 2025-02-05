@@ -10,9 +10,7 @@ public class GameSlotContent : MonoBehaviour
 
     public GameSlotContentType Type => type;
 
-    GameSlotContentFactory originFactory;
-
-    TargetPoint target;
+    GameSlotContentFactory originFactory;    
 
     public GameSlotContentFactory OriginFactory
     {
