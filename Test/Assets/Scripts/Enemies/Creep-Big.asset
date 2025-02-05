@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Creep-Big
   m_EditorClassIdentifier: 
   prefab: {fileID: 4169072185198684370, guid: 6a894410f010fd446a7af42de9e110ed, type: 3}
+  speedEnemy: 2
+  maxHeal: 100

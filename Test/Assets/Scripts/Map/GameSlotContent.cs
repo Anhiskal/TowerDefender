@@ -12,6 +12,8 @@ public class GameSlotContent : MonoBehaviour
 
     GameSlotContentFactory originFactory;
 
+    TargetPoint target;
+
     public GameSlotContentFactory OriginFactory
     {
         get => originFactory;
@@ -25,6 +27,11 @@ public class GameSlotContent : MonoBehaviour
     public void Recycle()
     {
         originFactory.reclaim(this);
-    }    
+    }
+
+    public virtual void gameUpdate()
+    {
+        
+    }
 
 }
