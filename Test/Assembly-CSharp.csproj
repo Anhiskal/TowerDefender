@@ -63,12 +63,16 @@
     <Compile Include="Assets\Scripts\Tower\TargetPoint.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyCollection.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameManager.cs" />
+    <Compile Include="Assets\Scripts\UI\PanelWinLoss.cs" />
+    <Compile Include="Assets\Scripts\GameManager\Rules.cs" />
+    <Compile Include="Assets\Scripts\Base\Base.cs" />
     <Compile Include="Assets\Scripts\UI\SlotGameSelection.cs" />
     <Compile Include="Assets\Scripts\Map\SlotMap.cs" />
     <Compile Include="Assets\Scripts\Tower\Tower.cs" />
     <Compile Include="Assets\Scripts\Map\GameSlotContent.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Map\GameMap.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Map\GameSlotContentFactory.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameObjectFactory.cs" />
