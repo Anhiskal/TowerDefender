@@ -24,11 +24,14 @@ public class GameManager : MonoBehaviour
 
     EnemyCollection enemies = new EnemyCollection();
 
+    [SerializeField]
+    SlotGameSelection gameSelection;
+
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
     void Awake()
     {
-        map.Initialize(mapSize, tileContentFactory);
+        map.Initialize(mapSize, tileContentFactory);        
     }
 
     void OnValidate()
@@ -48,12 +51,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             handleTouch();
-        }
-
-        else if (Input.GetMouseButtonDown(1))
-        {
-            handleAlternativeTouch();
-        }
+        }        
 
         if (map.SpawnPointCount >= 1)
         {
@@ -78,16 +76,19 @@ public class GameManager : MonoBehaviour
         SlotMap slot = map.getSlot(TouchRay);
         if (slot != null)
         {
-            map.ToggleTower(slot);
+            //map.ToggleTower(slot);
+            changeSlotMap(slot);
         }
     }
-
-    void handleAlternativeTouch()
-    {
-        SlotMap slot = map.getSlot(TouchRay);
-        if (slot != null)
-        {            
-            map.ToggleSpawnPoint(slot);
+    private void changeSlotMap(SlotMap slot)
+    {        
+        switch (gameSelection.gameSlotContentType) 
+        {
+            case GameSlotContentType.Empty: map.ToggleEmpty(slot); break;
+            case GameSlotContentType.Destination: map.ToggleDestination(slot); break;
+            case GameSlotContentType.Wall: map.ToggleWall(slot); break;
+            case GameSlotContentType.Tower: map.ToggleTower(slot); break;             
+            case GameSlotContentType.SpawnPoint: map.ToggleSpawnPoint(slot); break;
         }
     }
 
