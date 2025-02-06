@@ -10,12 +10,14 @@ public class EnemyFactory : GameObjectFactory
     float speedEnemy = 5f;
     [SerializeField]
     float maxHeal;
+    [SerializeField]
+    float damage;
 
     public Enemy get()
     {
         Enemy instance = CreateGameObjectInstance(prefab);
         instance.OriginFactory = this;
-        instance.initialize(speedEnemy, maxHeal);
+        instance.initialize(speedEnemy, maxHeal, damage);
         return instance;
     }
 
