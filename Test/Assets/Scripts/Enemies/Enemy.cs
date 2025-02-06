@@ -3,8 +3,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     EnemyFactory originFactory;
-    float speedEnemy;    
+    float speedEnemy;
 
+    [SerializeField]
+    HealthBar healthBar;
     public EnemyFactory OriginFactory
     {
         get => originFactory;
@@ -14,9 +16,16 @@ public class Enemy : MonoBehaviour
             originFactory = value;
         }
     }
-   
+
+    bool iTouchTheBase;
+
+    public bool IsTouchTheBase => iTouchTheBase;
 
     float health {  get; set; }
+
+    float damage;
+
+    public float getDamage => damage;
 
     public void spawnOn(SlotMap slot)
     {
@@ -34,15 +43,25 @@ public class Enemy : MonoBehaviour
         return true;
     }
 
-    public void initialize(float speed, float initialHealth)
+    public void initialize(float speed, float initialHealth, float damage)
     {
         speedEnemy = speed;
         health = initialHealth;
+        healthBar.initHealthBar(initialHealth);
+        iTouchTheBase = false;
+        this.damage = damage;
     }
 
     public void applyDamage(float damage)
     {
         Debug.Assert(damage >= 0f, "Negative damage applied.");
         health -= damage;
+        healthBar.updateHealthBar(health);
+    }
+
+    public void deathForTouchBase() 
+    {
+        iTouchTheBase = true;
+        health = 0;
     }
 }

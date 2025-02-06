@@ -27,11 +27,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     SlotGameSelection gameSelection;
 
+    [SerializeField]
+    Rules rulesOfLevel;
+
+    [SerializeField]
+    PanelWinLoss panelWinLoss;
+
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
     void Awake()
     {
-        map.Initialize(mapSize, tileContentFactory);        
+        map.Initialize(mapSize, tileContentFactory);
+        enemies.initeCallBacks(rulesOfLevel.aEnemyTouchBase, rulesOfLevel.aEnemyDeath);
+        rulesOfLevel.initeRules(panelWinLoss.onEnablePanelWin, panelWinLoss.onEblePanelLoss);
     }
 
     void OnValidate()
@@ -75,8 +83,7 @@ public class GameManager : MonoBehaviour
     {
         SlotMap slot = map.getSlot(TouchRay);
         if (slot != null)
-        {
-            //map.ToggleTower(slot);
+        {            
             changeSlotMap(slot);
         }
     }
