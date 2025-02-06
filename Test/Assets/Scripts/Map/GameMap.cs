@@ -78,21 +78,39 @@ public class GameMap : MonoBehaviour
         }
     }
 
+    public void ToggleEmpty(SlotMap slot) 
+    {
+        switch (slot.Content.Type) 
+        {
+            case GameSlotContentType.Destination: break;
+            case GameSlotContentType.Wall: break;
+            case GameSlotContentType.Tower:
+                updatingContent.Remove(slot.Content); 
+                break;
+            case GameSlotContentType.SpawnPoint:
+                spawnPoints.Remove(slot); 
+                break;
+        }
+
+        slot.Content = contentFactory.get(GameSlotContentType.Empty);
+    }
+
     public void ToggleDestination(SlotMap slot) 
     {
-        if (slot.Content.Type == GameSlotContentType.Destination) 
+        if (slot.Content.Type == GameSlotContentType.Empty) 
         {
-            slot.Content = contentFactory.get(GameSlotContentType.Empty);
+            slot.Content = contentFactory.get(GameSlotContentType.Destination);
         }
+
     }
 
     public void ToggleWall (SlotMap slot) 
     {
-        if (slot.Content.Type == GameSlotContentType.Wall)
+        /*if (slot.Content.Type == GameSlotContentType.Wall)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Empty);
         }
-        else if (slot.Content.Type == GameSlotContentType.Empty)
+        else */if (slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Wall);
         }
@@ -100,12 +118,12 @@ public class GameMap : MonoBehaviour
 
     public void ToggleTower(SlotMap slot)
     {
-        if (slot.Content.Type == GameSlotContentType.Tower)
+        /*if (slot.Content.Type == GameSlotContentType.Tower)
         {
             updatingContent.Remove(slot.Content);
             slot.Content = contentFactory.get(GameSlotContentType.Empty);
         }
-        else if (slot.Content.Type == GameSlotContentType.Empty)
+        else */if (slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Tower);
             updatingContent.Add(slot.Content);
@@ -114,7 +132,7 @@ public class GameMap : MonoBehaviour
 
     public void ToggleSpawnPoint(SlotMap slot)
     {
-        if (slot.Content.Type == GameSlotContentType.SpawnPoint)
+        /*if (slot.Content.Type == GameSlotContentType.SpawnPoint)
         {           
             if(spawnPoints.Count > 1) 
             {
@@ -122,7 +140,7 @@ public class GameMap : MonoBehaviour
                 slot.Content = contentFactory.get(GameSlotContentType.Empty);
             }
         }
-        else if (slot.Content.Type == GameSlotContentType.Empty)
+        else */if (slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.SpawnPoint);
             spawnPoints.Add(slot);
