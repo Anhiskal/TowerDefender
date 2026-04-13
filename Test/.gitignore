@@ -1,1 +1,9 @@
 Library/
+Logs/
+Temp/
+Obj/
+UserSettings/
+.vs/
+*.csproj
+*.sln
+*.dllLibrary/
