@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static SlotMap;
 
@@ -19,6 +21,7 @@ public class GameMap : MonoBehaviour
 
     List<SlotMap> spawnPoints = new List<SlotMap>();
     List<GameSlotContent> updatingContent = new List<GameSlotContent>();
+    Queue<SlotMap> searchFrontier = new Queue<SlotMap>();
 
     public void Initialize(Vector2Int size, GameSlotContentFactory contentFactory)
     {
@@ -42,9 +45,48 @@ public class GameMap : MonoBehaviour
                     x - offset.x, 0f, y - offset.y
                 );
                 slot.Content = contentFactory.get(GameSlotContentType.Empty);
+
+                if (x > 0)
+                {
+                    SlotMap.MakeEastWestNeighbors(slot, slots[i - 1]);
+                }
+                if (y > 0)
+                {
+                    SlotMap.MakeNorthSouthNeighbors(slot, slots[i - size.x]);
+                }
             }
         }
 
+        FindPaths();
+    }
+
+    void FindPaths()
+    {
+        foreach (SlotMap tile in slots)
+        {
+            tile.ClearPath();
+        }
+
+        slots[0].BecomeDestination();
+        searchFrontier.Enqueue(slots[0]);
+
+        while (searchFrontier.Count > 0)
+        {
+            
+            SlotMap tile = searchFrontier.Dequeue();
+            if (tile != null)
+            {
+                searchFrontier.Enqueue(tile.GrowPathNorth());
+                searchFrontier.Enqueue(tile.GrowPathEast());
+                searchFrontier.Enqueue(tile.GrowPathSouth());
+                searchFrontier.Enqueue(tile.GrowPathWest());
+            }
+        }
+
+        foreach (SlotMap tile in slots)
+        {
+            tile.ShowPath();
+        }
     }
 
     public SlotMap getSlot(Ray ray) 
@@ -146,6 +188,8 @@ public class GameMap : MonoBehaviour
             spawnPoints.Add(slot);
         }
     }
+
+    
 
 
 }

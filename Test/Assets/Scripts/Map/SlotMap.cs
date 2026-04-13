@@ -5,9 +5,10 @@ using UnityEngine;
 public class SlotMap : MonoBehaviour
 {
     [SerializeField]
-    Transform indication = default;
+    Transform arrow = default;
 
-    SlotMap north, east, south, west;    
+    SlotMap north, east, south, west, nextOnPath;
+    int distance;
 
     public enum GameSlotContentType
     {
@@ -15,6 +16,16 @@ public class SlotMap : MonoBehaviour
     }
 
     GameSlotContent content;
+
+    public bool HasPath => distance != int.MaxValue;
+
+    public SlotMap GrowPathNorth() => GrowPathTo(north);
+
+    public SlotMap GrowPathEast() => GrowPathTo(east);
+
+    public SlotMap GrowPathSouth() => GrowPathTo(south);
+
+    public SlotMap GrowPathWest() => GrowPathTo(west);
 
     public GameSlotContent Content
     {
@@ -29,6 +40,70 @@ public class SlotMap : MonoBehaviour
             content = value;
             content.transform.localPosition = transform.localPosition;
         }
+    }
+
+    public static void MakeEastWestNeighbors(SlotMap east, SlotMap west)
+    {
+        Debug.Assert(
+            west.east == null && east.west == null, "Redefined neighbors!"
+        );
+        west.east = east;
+        east.west = west;
+    }
+
+    public static void MakeNorthSouthNeighbors(SlotMap north, SlotMap south)
+    {
+        Debug.Assert(
+            south.north == null && north.south == null, "Redefined neighbors!"
+        );
+        south.north = north;
+        north.south = south;
+    }
+
+    public void ClearPath()
+    {
+        distance = int.MaxValue;
+        nextOnPath = null;
+    }
+    public void BecomeDestination()
+    {
+        distance = 0;
+        nextOnPath = null;
+    }
+
+    SlotMap GrowPathTo(SlotMap neighbor)
+    {
+        Debug.Assert(HasPath, "No path!");
+
+        if (neighbor == null || neighbor.HasPath)
+        {
+            return null;
+        }
+        neighbor.distance = distance + 1;
+        neighbor.nextOnPath = this;
+
+        return neighbor;
+    }
+
+    static Quaternion
+        northRotation = Quaternion.Euler(90f, 0f, 0f),
+        eastRotation = Quaternion.Euler(90f, 90f, 0f),
+        southRotation = Quaternion.Euler(90f, 180f, 0f),
+        westRotation = Quaternion.Euler(90f, 270f, 0f);
+
+    public void ShowPath()
+    {
+        if (distance == 0)
+        {
+            arrow.gameObject.SetActive(false);
+            return;
+        }
+        arrow.gameObject.SetActive(true);
+        arrow.localRotation =
+            nextOnPath == north ? northRotation :
+            nextOnPath == east ? eastRotation :
+            nextOnPath == south ? southRotation :
+            westRotation;
     }
 }
 
