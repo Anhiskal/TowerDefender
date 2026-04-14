@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -13,11 +14,16 @@ public class GameMap : MonoBehaviour
     [SerializeField]
     SlotMap slotPrefab = default;
 
+    [SerializeField]
+    Texture2D gridTexture = default;
+
     Vector2Int size;
 
     SlotMap[] slots;
 
     GameSlotContentFactory contentFactory;
+
+    bool showGrid, showPaths;
 
     List<SlotMap> spawnPoints = new List<SlotMap>();
     List<GameSlotContent> updatingContent = new List<GameSlotContent>();
@@ -43,8 +49,7 @@ public class GameMap : MonoBehaviour
                 slot.transform.SetParent(transform, false);
                 slot.transform.localPosition = new Vector3(
                     x - offset.x, 0f, y - offset.y
-                );
-                slot.Content = contentFactory.get(GameSlotContentType.Empty);
+                );               
 
                 if (x > 0)
                 {
@@ -54,21 +59,39 @@ public class GameMap : MonoBehaviour
                 {
                     SlotMap.MakeNorthSouthNeighbors(slot, slots[i - size.x]);
                 }
+
+                slot.IsAlternative = (x & 1) == 0;
+                if ((y & 1) == 0)
+                {
+                    slot.IsAlternative = !slot.IsAlternative;
+                }
+
+                slot.Content = contentFactory.get(GameSlotContentType.Empty);
             }
         }
 
-        FindPaths();
+        ToggleDestination(slots[slots.Length / 2]);
     }
 
-    void FindPaths()
+    bool FindPaths()
     {
         foreach (SlotMap tile in slots)
         {
-            tile.ClearPath();
+            if (tile.Content.Type == GameSlotContentType.Destination)
+            {
+                tile.BecomeDestination();
+                searchFrontier.Enqueue(tile);
+            }
+            else
+            {
+                tile.ClearPath();
+            }            
         }
 
-        slots[0].BecomeDestination();
-        searchFrontier.Enqueue(slots[0]);
+        if (searchFrontier.Count == 0)
+        {
+            return false;
+        }
 
         while (searchFrontier.Count > 0)
         {
@@ -76,17 +99,41 @@ public class GameMap : MonoBehaviour
             SlotMap tile = searchFrontier.Dequeue();
             if (tile != null)
             {
-                searchFrontier.Enqueue(tile.GrowPathNorth());
-                searchFrontier.Enqueue(tile.GrowPathEast());
-                searchFrontier.Enqueue(tile.GrowPathSouth());
-                searchFrontier.Enqueue(tile.GrowPathWest());
+                if (tile.IsAlternative)
+                {
+                    searchFrontier.Enqueue(tile.GrowPathNorth());
+                    searchFrontier.Enqueue(tile.GrowPathSouth());
+                    searchFrontier.Enqueue(tile.GrowPathEast());                
+                    searchFrontier.Enqueue(tile.GrowPathWest());
+                }
+                else
+                {
+                    searchFrontier.Enqueue(tile.GrowPathWest());
+                    searchFrontier.Enqueue(tile.GrowPathEast());
+                    searchFrontier.Enqueue(tile.GrowPathSouth());
+                    searchFrontier.Enqueue(tile.GrowPathNorth());
+                }
             }
+            
         }
 
         foreach (SlotMap tile in slots)
         {
-            tile.ShowPath();
+            if (!tile.HasPath)
+            {
+                return false;
+            }
         }
+
+        if (showPaths) 
+        {
+            foreach (SlotMap tile in slots)
+            {
+                tile.ShowPath();
+            }
+        }            
+
+        return true;
     }
 
     public SlotMap getSlot(Ray ray) 
@@ -137,24 +184,41 @@ public class GameMap : MonoBehaviour
         slot.Content = contentFactory.get(GameSlotContentType.Empty);
     }
 
-    public void ToggleDestination(SlotMap slot) 
+    public void ToggleDestination(SlotMap slot)
     {
-        if (slot.Content.Type == GameSlotContentType.Empty) 
+        if (slot.Content.Type == GameSlotContentType.Destination)
+        {
+            slot.Content = contentFactory.get(GameSlotContentType.Empty);
+            if (!FindPaths())
+            {
+                slot.Content =
+                    contentFactory.get(GameSlotContentType.Destination);
+                FindPaths();
+            }
+        }
+        else if (slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Destination);
+            FindPaths();
         }
 
     }
 
     public void ToggleWall (SlotMap slot) 
     {
-        /*if (slot.Content.Type == GameSlotContentType.Wall)
+        if (slot.Content.Type == GameSlotContentType.Wall)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Empty);
+            FindPaths();
         }
-        else */if (slot.Content.Type == GameSlotContentType.Empty)
+        else if(slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.Wall);
+            if (!FindPaths())
+            {
+                slot.Content = contentFactory.get(GameSlotContentType.Empty);
+                FindPaths();
+            }
         }
     }
 
@@ -189,7 +253,47 @@ public class GameMap : MonoBehaviour
         }
     }
 
-    
+    public bool ShowPaths
+    {
+        get => showPaths;
+        set
+        {
+            showPaths = value;
+            if (showPaths)
+            {
+                foreach (SlotMap tile in slots)
+                {
+                    tile.ShowPath();
+                }
+            }
+            else
+            {
+                foreach (SlotMap tile in slots)
+                {
+                    tile.HidePath();
+                }
+            }
+        }
+    }
+
+    public bool ShowGrid
+    {
+        get => showGrid;
+        set
+        {
+            showGrid = value;
+            Material m = map.GetComponent<MeshRenderer>().material;
+            if (showGrid)
+            {
+                m.mainTexture = gridTexture;
+                m.SetTextureScale("_MainTex", size);
+            }
+            else
+            {
+                m.mainTexture = null;
+            }
+        }
+    }
 
 
 }

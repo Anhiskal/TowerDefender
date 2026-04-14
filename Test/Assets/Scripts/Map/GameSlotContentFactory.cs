@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static SlotMap;
 
 [CreateAssetMenu]
@@ -17,7 +18,9 @@ public class GameSlotContentFactory : GameObjectFactory
     Tower towerPrefab = default;
 
     [SerializeField]
-    GameSlotContent spawnPrefab = default;    
+    GameSlotContent spawnPrefab = default;
+
+    Scene contentScene;
 
     public void reclaim(GameSlotContent content)
     {
@@ -29,8 +32,29 @@ public class GameSlotContentFactory : GameObjectFactory
     {
         GameSlotContent instance = CreateGameObjectInstance(prefab);
         instance.OriginFactory = this;
-        
+        MoveToFactoryScene(instance.gameObject);
+
         return instance;
+    }
+
+    void MoveToFactoryScene(GameObject o)
+    {
+        if (!contentScene.isLoaded)
+        {
+            if (Application.isEditor)
+            {
+                contentScene = SceneManager.GetSceneByName(name);
+                if (!contentScene.isLoaded)
+                {
+                    contentScene = SceneManager.CreateScene(name);
+                }
+            }
+            else
+            {
+                contentScene = SceneManager.CreateScene(name);
+            }
+        }
+        SceneManager.MoveGameObjectToScene(o, contentScene);
     }
 
     public GameSlotContent get(GameSlotContentType type)

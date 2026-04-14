@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
         map.Initialize(mapSize, tileContentFactory);
         enemies.initeCallBacks(rulesOfLevel.aEnemyTouchBase, rulesOfLevel.aEnemyDeath);
         rulesOfLevel.initeRules(panelWinLoss.onEnablePanelWin, panelWinLoss.onEblePanelLoss);
+
+        map.ShowGrid = true;
     }
 
     void OnValidate()
@@ -59,7 +61,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             handleTouch();
-        }        
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            HandleAlternativeTouch();
+        }
 
         if (map.SpawnPointCount >= 1)
         {
@@ -75,6 +81,16 @@ public class GameManager : MonoBehaviour
             enemies.GameUpdate();
         }
 
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            map.ShowPaths = !map.ShowPaths;
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            map.ShowGrid = !map.ShowGrid;
+        }
+
         Physics.SyncTransforms();
         map.gameUpdate();
     }
@@ -87,6 +103,16 @@ public class GameManager : MonoBehaviour
             changeSlotMap(slot);
         }
     }
+
+    void HandleAlternativeTouch()
+    {
+        SlotMap slot = map.getSlot(TouchRay);
+        if (slot != null)
+        {
+            map.ToggleDestination(slot);
+        }
+    }
+
     private void changeSlotMap(SlotMap slot)
     {        
         switch (gameSelection.gameSlotContentType) 
