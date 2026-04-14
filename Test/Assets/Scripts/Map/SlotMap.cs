@@ -27,6 +27,8 @@ public class SlotMap : MonoBehaviour
 
     public SlotMap GrowPathWest() => GrowPathTo(west);
 
+    public bool IsAlternative { get; set; }
+
     public GameSlotContent Content
     {
         get => content;
@@ -82,7 +84,7 @@ public class SlotMap : MonoBehaviour
         neighbor.distance = distance + 1;
         neighbor.nextOnPath = this;
 
-        return neighbor;
+        return neighbor.Content.Type != GameSlotContentType.Wall ? neighbor : null;
     }
 
     static Quaternion
@@ -104,6 +106,11 @@ public class SlotMap : MonoBehaviour
             nextOnPath == east ? eastRotation :
             nextOnPath == south ? southRotation :
             westRotation;
+    }
+
+    public void HidePath()
+    {
+        arrow.gameObject.SetActive(false);
     }
 }
 
