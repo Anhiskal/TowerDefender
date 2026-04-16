@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\map\\gamemap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\map\\gamemap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\enemies\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|d:\\proyectos\\bigfoot\\test\\towerdefender\\test\\assets\\scripts\\gamemanager\\directionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\directionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|d:\\proyectos\\bigfoot\\test\\towerdefender\\test\\assets\\scripts\\map\\slotmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\map\\slotmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\enemies\\enemyfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemies\\enemyfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\map\\gamemap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\map\\gamemap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\map\\gameslotcontentfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\map\\gameslotcontentfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\gamemanager\\gameobjectfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\gameobjectfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A513BC8D-6A7D-D6C5-EEBE-D27CF600D276}|Assembly-CSharp.csproj|D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\assets\\scripts\\map\\gameslotcontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,59 +46,105 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GameSlotContentFactory.cs",
-              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
-              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAwwD8AAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T21:17:17.696Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GameSlotContent.cs",
-              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContent.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Map\\GameSlotContent.cs",
-              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContent.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Map\\GameSlotContent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T21:09:05.167Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GameManager.cs",
-              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\GameManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\GameManager.cs",
-              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\GameManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\GameManager\\GameManager.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAQwCsAAAALAAAAAAAAAA==",
+              "Title": "DirectionExtensions.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\DirectionExtensions.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\DirectionExtensions.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\DirectionExtensions.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager\\DirectionExtensions.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAuwCwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T07:37:51.839Z",
+              "WhenOpened": "2026-04-16T00:45:42.579Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Enemies\\Enemy.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\Enemy.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Enemies\\Enemy.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\Enemy.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAuwFMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T20:20:59.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EnemyFactory.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Enemies\\EnemyFactory.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemies\\EnemyFactory.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Enemies\\EnemyFactory.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemies\\EnemyFactory.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwA0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T20:20:16.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameObjectFactory.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\GameObjectFactory.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\GameObjectFactory.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\GameObjectFactory.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager\\GameObjectFactory.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T20:19:15.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GameSlotContentFactory.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Map\\GameSlotContentFactory.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwD0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T21:17:17.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GameSlotContent.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContent.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Map\\GameSlotContent.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameSlotContent.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Map\\GameSlotContent.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T21:09:05.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\GameManager.cs",
+              "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\GameManager\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager\\GameManager.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAQwBgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-31T07:37:51.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "GameMap.cs",
               "DocumentMoniker": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameMap.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Map\\GameMap.cs",
               "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\GameMap.cs",
               "RelativeToolTip": "Assets\\Scripts\\Map\\GameMap.cs",
-              "ViewState": "AgIAABABAAAAAAAAAADwvyABAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAIAwwCEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T16:33:53.33Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T16:33:53.33Z"
             },
             {
               "$type": "Document",
@@ -92,7 +154,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Map\\SlotMap.cs",
               "ToolTip": "D:\\Proyectos\\BigFoot\\Test\\TowerDefender\\Test\\Assets\\Scripts\\Map\\SlotMap.cs",
               "RelativeToolTip": "Assets\\Scripts\\Map\\SlotMap.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAiwHEAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAYwB8AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-13T16:34:15.375Z",
               "EditorCaption": ""

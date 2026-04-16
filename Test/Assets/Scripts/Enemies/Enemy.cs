@@ -27,20 +27,100 @@ public class Enemy : MonoBehaviour
 
     public float getDamage => damage;
 
+    SlotMap slotFrom, slotTo;
+    Vector3 positionFrom, positionTo;
+    float progress;
+
+    Direction direction;
+    DirectionChange directionChange;
+    float directionAngleFrom, directionAngleTo;
+
     public void spawnOn(SlotMap slot)
     {
-        transform.localPosition = slot.transform.localPosition;
+        Debug.Assert(slot.NextTileOnPath != null, "Nowhere to go!", this);
+        slotFrom = slot;
+        slotTo = slot.NextTileOnPath;
+        
+        progress = 0f;
+        PrepareIntro();
+    }
+
+    void PrepareIntro()
+    {
+        positionFrom = slotFrom.transform.localPosition;
+        positionTo = slotFrom.ExitPoint;
+        direction = slotFrom.PathDirection;
+        directionChange = DirectionChange.None;
+        directionAngleFrom = directionAngleTo = direction.GetAngle();
+        transform.localRotation = direction.GetRotation();
     }
 
     public bool gameUpdate()
     {
-        if (health <= 0f) 
+        progress += Time.deltaTime;
+        while (progress >= 1f)
         {
-            originFactory.Reclaim(this);
-            return false;
+            slotFrom = slotTo;
+            slotTo = slotTo.NextTileOnPath;
+            if (slotTo == null)
+            {
+                OriginFactory.Reclaim(this);
+                return false;
+            }
+
+            
+            progress -= 1f;
+            PrepareNextState();
         }
-        transform.localPosition += Vector3.forward * Time.deltaTime * speedEnemy;
+        transform.localPosition =
+            Vector3.LerpUnclamped(positionFrom, positionTo, progress);
+
+        if (directionChange != DirectionChange.None)
+        {
+            float angle = Mathf.LerpUnclamped(
+                directionAngleFrom, directionAngleTo, progress
+            );
+            transform.localRotation = Quaternion.Euler(0f, angle, 0f);
+        }
         return true;
+    }
+
+    void PrepareNextState()
+    {
+        positionFrom = positionTo;
+        positionTo = slotFrom.ExitPoint;
+        directionChange = direction.GetDirectionChangeTo(slotFrom.PathDirection);
+        direction = slotFrom.PathDirection;
+        directionAngleFrom = directionAngleTo;
+
+        switch (directionChange)
+        {
+            case DirectionChange.None: PrepareForward(); break;
+            case DirectionChange.TurnRight: PrepareTurnRight(); break;
+            case DirectionChange.TurnLeft: PrepareTurnLeft(); break;
+            default: PrepareTurnAround(); break;
+        }
+    }
+
+    void PrepareForward()
+    {
+        transform.localRotation = direction.GetRotation();
+        directionAngleTo = direction.GetAngle();
+    }
+
+    void PrepareTurnRight()
+    {
+        directionAngleTo = directionAngleFrom + 90f;
+    }
+
+    void PrepareTurnLeft()
+    {
+        directionAngleTo = directionAngleFrom - 90f;
+    }
+
+    void PrepareTurnAround()
+    {
+        directionAngleTo = directionAngleFrom + 180f;
     }
 
     public void initialize(float speed, float initialHealth, float damage)
