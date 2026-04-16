@@ -91,9 +91,7 @@ public class SlotMap : MonoBehaviour
         neighbor.distance = distance + 1;
         neighbor.nextOnPath = this;
 
-        neighbor.ExitPoint =
-            (neighbor.transform.localPosition + transform.localPosition) * 0.5f;
-
+        neighbor.ExitPoint = neighbor.transform.localPosition + direction.GetHalfVector();
         neighbor.PathDirection = direction;
 
         return neighbor.Content.Type != GameSlotContentType.Wall ? neighbor : null;

@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac39bb7c3b7c619418c0b2cf2bb0ee22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 2053301243304353279}
   healthBar: {fileID: 6284177931668878685}
-  iTouchTheBase: 0
 --- !u!114 &6284177931668878685
 MonoBehaviour:
   m_ObjectHideFlags: 0

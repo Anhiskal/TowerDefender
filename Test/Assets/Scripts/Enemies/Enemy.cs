@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
     float speedEnemy;
 
     [SerializeField]
+    Transform model = default;
+
+    [SerializeField]
     HealthBar healthBar;
     public EnemyFactory OriginFactory
     {
@@ -19,6 +22,8 @@ public class Enemy : MonoBehaviour
 
     bool iTouchTheBase;
 
+    float pathOffset;
+
     public bool IsTouchTheBase => iTouchTheBase;
 
     float health {  get; set; }
@@ -29,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     SlotMap slotFrom, slotTo;
     Vector3 positionFrom, positionTo;
-    float progress;
+    float progress, progressFactor;
 
     Direction direction;
     DirectionChange directionChange;
@@ -43,39 +48,28 @@ public class Enemy : MonoBehaviour
         
         progress = 0f;
         PrepareIntro();
-    }
-
-    void PrepareIntro()
-    {
-        positionFrom = slotFrom.transform.localPosition;
-        positionTo = slotFrom.ExitPoint;
-        direction = slotFrom.PathDirection;
-        directionChange = DirectionChange.None;
-        directionAngleFrom = directionAngleTo = direction.GetAngle();
-        transform.localRotation = direction.GetRotation();
-    }
+    }    
 
     public bool gameUpdate()
     {
-        progress += Time.deltaTime;
+        progress += Time.deltaTime * progressFactor;
         while (progress >= 1f)
-        {
-            slotFrom = slotTo;
-            slotTo = slotTo.NextTileOnPath;
+        {            
             if (slotTo == null)
             {
                 OriginFactory.Reclaim(this);
                 return false;
             }
 
-            
-            progress -= 1f;
+            progress = (progress - 1f) / progressFactor;
             PrepareNextState();
+            progress *= progressFactor;
         }
-        transform.localPosition =
-            Vector3.LerpUnclamped(positionFrom, positionTo, progress);
-
-        if (directionChange != DirectionChange.None)
+        if (directionChange == DirectionChange.None)
+        {
+            transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, progress);
+        }
+        else
         {
             float angle = Mathf.LerpUnclamped(
                 directionAngleFrom, directionAngleTo, progress
@@ -87,7 +81,14 @@ public class Enemy : MonoBehaviour
 
     void PrepareNextState()
     {
+        slotFrom = slotTo;
+        slotTo = slotTo.NextTileOnPath;
         positionFrom = positionTo;
+        if (slotTo == null)
+        {
+            PrepareOutro();
+            return;
+        }
         positionTo = slotFrom.ExitPoint;
         directionChange = direction.GetDirectionChangeTo(slotFrom.PathDirection);
         direction = slotFrom.PathDirection;
@@ -102,25 +103,58 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void PrepareIntro()
+    {
+        positionFrom = slotFrom.transform.localPosition;
+        positionTo = slotFrom.ExitPoint;
+        direction = slotFrom.PathDirection;
+        directionChange = DirectionChange.None;
+        directionAngleFrom = directionAngleTo = direction.GetAngle();
+        model.localPosition = new Vector3(pathOffset, 0f);
+        transform.localRotation = direction.GetRotation();
+        progressFactor = 2f * speedEnemy;
+    }
+
     void PrepareForward()
     {
         transform.localRotation = direction.GetRotation();
         directionAngleTo = direction.GetAngle();
+        model.localPosition = new Vector3(pathOffset, 0f);
+        progressFactor = speedEnemy;
     }
 
     void PrepareTurnRight()
     {
         directionAngleTo = directionAngleFrom + 90f;
+        model.localPosition = new Vector3(pathOffset - 0.5f, 0f);
+        transform.localPosition = positionFrom + direction.GetHalfVector();
+        progressFactor = speedEnemy / (Mathf.PI * 0.5f * (0.5f - pathOffset));
     }
 
     void PrepareTurnLeft()
     {
         directionAngleTo = directionAngleFrom - 90f;
+        model.localPosition = new Vector3(pathOffset + 0.5f, 0f);
+        transform.localPosition = positionFrom + direction.GetHalfVector();
+        progressFactor = speedEnemy / (Mathf.PI * 0.5f * (0.5f + pathOffset));
     }
 
     void PrepareTurnAround()
     {
-        directionAngleTo = directionAngleFrom + 180f;
+        directionAngleTo = directionAngleFrom + (pathOffset < 0f ? 180f : -180f);
+        model.localPosition = new Vector3(pathOffset, 0f);
+        transform.localPosition = positionFrom;
+        progressFactor = speedEnemy / (Mathf.PI * Mathf.Max(Mathf.Abs(pathOffset), 0.2f));
+    }
+
+    void PrepareOutro()
+    {
+        positionTo = slotFrom.transform.localPosition;
+        directionChange = DirectionChange.None;
+        directionAngleTo = direction.GetAngle();
+        model.localPosition = new Vector3(pathOffset, 0f);
+        transform.localRotation = direction.GetRotation();
+        progressFactor = 2f * speedEnemy;
     }
 
     public void initialize(float speed, float initialHealth, float damage)
@@ -143,5 +177,11 @@ public class Enemy : MonoBehaviour
     {
         iTouchTheBase = true;
         health = 0;
+    }
+
+    public void Initialize(float scale, float pathOffset)
+    {
+        model.localScale = new Vector3(scale, scale, scale);
+        this.pathOffset = pathOffset;
     }
 }
