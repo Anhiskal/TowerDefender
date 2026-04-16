@@ -10,6 +10,8 @@ public class SlotMap : MonoBehaviour
     SlotMap north, east, south, west, nextOnPath;
     int distance;
 
+    public Vector3 ExitPoint { get; private set; }
+
     public enum GameSlotContentType
     {
         Empty, Destination, Wall, Tower, SpawnPoint
@@ -19,15 +21,19 @@ public class SlotMap : MonoBehaviour
 
     public bool HasPath => distance != int.MaxValue;
 
-    public SlotMap GrowPathNorth() => GrowPathTo(north);
+    public SlotMap GrowPathNorth() => GrowPathTo(north, Direction.South);
 
-    public SlotMap GrowPathEast() => GrowPathTo(east);
+    public SlotMap GrowPathEast() => GrowPathTo(east, Direction.West);
 
-    public SlotMap GrowPathSouth() => GrowPathTo(south);
+    public SlotMap GrowPathSouth() => GrowPathTo(south, Direction.North);
 
-    public SlotMap GrowPathWest() => GrowPathTo(west);
+    public SlotMap GrowPathWest() => GrowPathTo(west, Direction.East);
+
+    public Direction PathDirection { get; private set; }   
 
     public bool IsAlternative { get; set; }
+
+    public SlotMap NextTileOnPath => nextOnPath;
 
     public GameSlotContent Content
     {
@@ -71,9 +77,10 @@ public class SlotMap : MonoBehaviour
     {
         distance = 0;
         nextOnPath = null;
+        ExitPoint = transform.localPosition;
     }
 
-    SlotMap GrowPathTo(SlotMap neighbor)
+    SlotMap GrowPathTo(SlotMap neighbor, Direction direction)
     {
         Debug.Assert(HasPath, "No path!");
 
@@ -83,6 +90,11 @@ public class SlotMap : MonoBehaviour
         }
         neighbor.distance = distance + 1;
         neighbor.nextOnPath = this;
+
+        neighbor.ExitPoint =
+            (neighbor.transform.localPosition + transform.localPosition) * 0.5f;
+
+        neighbor.PathDirection = direction;
 
         return neighbor.Content.Type != GameSlotContentType.Wall ? neighbor : null;
     }

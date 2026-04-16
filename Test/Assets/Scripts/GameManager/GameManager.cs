@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     GameMap map = default;
 
     [SerializeField]
-    GameSlotContentFactory tileContentFactory = default;
+    GameSlotContentFactory slotContentFactory = default;
 
     [SerializeField]
     EnemyFactory enemyFactory = default;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        map.Initialize(mapSize, tileContentFactory);
+        map.Initialize(mapSize, slotContentFactory);
         enemies.initeCallBacks(rulesOfLevel.aEnemyTouchBase, rulesOfLevel.aEnemyDeath);
         rulesOfLevel.initeRules(panelWinLoss.onEnablePanelWin, panelWinLoss.onEblePanelLoss);
 
@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
             spawnProgress += spawnSpeed * Time.deltaTime;
             while (spawnProgress >= timeForSpawn)
             {
-                spawnProgress = 0;
+                //spawnProgress = 0;
+                spawnProgress -= 1f;
                 spawanEnemy();
             }
         }
@@ -109,7 +110,14 @@ public class GameManager : MonoBehaviour
         SlotMap slot = map.getSlot(TouchRay);
         if (slot != null)
         {
-            map.ToggleDestination(slot);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                map.ToggleDestination(slot);
+            }
+            else
+            {
+                map.ToggleSpawnPoint(slot);
+            }
         }
     }
 

@@ -26,6 +26,8 @@ public class GameMap : MonoBehaviour
     bool showGrid, showPaths;
 
     List<SlotMap> spawnPoints = new List<SlotMap>();
+    public int SpawnPointCount => spawnPoints.Count;
+
     List<GameSlotContent> updatingContent = new List<GameSlotContent>();
     Queue<SlotMap> searchFrontier = new Queue<SlotMap>();
 
@@ -71,6 +73,7 @@ public class GameMap : MonoBehaviour
         }
 
         ToggleDestination(slots[slots.Length / 2]);
+        ToggleSpawnPoint(slots[0]);
     }
 
     bool FindPaths()
@@ -155,9 +158,7 @@ public class GameMap : MonoBehaviour
     public SlotMap getSpawnPoint(int index)
     {
         return spawnPoints[index];
-    }
-
-    public int SpawnPointCount => spawnPoints.Count;
+    }    
 
     public void gameUpdate()
     {
@@ -238,15 +239,15 @@ public class GameMap : MonoBehaviour
 
     public void ToggleSpawnPoint(SlotMap slot)
     {
-        /*if (slot.Content.Type == GameSlotContentType.SpawnPoint)
-        {           
-            if(spawnPoints.Count > 1) 
+        if (slot.Content.Type == GameSlotContentType.SpawnPoint)
+        {
+            if (spawnPoints.Count > 1)
             {
                 spawnPoints.Remove(slot);
                 slot.Content = contentFactory.get(GameSlotContentType.Empty);
             }
         }
-        else */if (slot.Content.Type == GameSlotContentType.Empty)
+        else if (slot.Content.Type == GameSlotContentType.Empty)
         {
             slot.Content = contentFactory.get(GameSlotContentType.SpawnPoint);
             spawnPoints.Add(slot);

@@ -2141,6 +2141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 1044192639}
   slotPrefab: {fileID: 4457334467897423448, guid: 1abb1f764e47b27428f0b7086ec52859, type: 3}
+  gridTexture: {fileID: 2800000, guid: 62cbbe9342d90834e877a0d38746be19, type: 3}
 --- !u!4 &1559140523
 Transform:
   m_ObjectHideFlags: 0

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Map\GameSlotContentFactory.cs" />
+    <Compile Include="Assets\Scripts\GameManager\DirectionExtensions.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameObjectFactory.cs" />
   </ItemGroup>
   <ItemGroup>
